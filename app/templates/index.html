@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>开源依赖许可审查</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>🛡️ 开源依赖许可审查</h1>
+  <p>上传依赖清单 · 选择项目许可策略 · 定位传递依赖中的许可证冲突</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2><span class="step">1</span> 上传依赖清单（JSON）</h2>
+    <div class="toolbar">
+      <label class="btn secondary">
+        选择文件…<input type="file" id="file-input" accept=".json,application/json" hidden>
+      </label>
+      <button id="btn-sample" class="btn secondary">加载示例清单</button>
+      <span id="file-name" class="muted"></span>
+    </div>
+    <textarea id="manifest-input" rows="12" spellcheck="false"
+      placeholder='粘贴 JSON 清单，格式：{"project": {...}, "packages": [...], "dependencies": [...]}'></textarea>
+
+    <h2><span class="step">2</span> 选择项目许可策略</h2>
+    <select id="policy-select"></select>
+    <p id="policy-desc" class="muted"></p>
+
+    <div class="actions">
+      <button id="btn-run" class="btn primary">开始审查</button>
+      <span id="upload-error" class="error"></span>
+    </div>
+  </section>
+
+  <section class="card hidden" id="result-section">
+    <h2>审查结果 <span id="result-meta" class="muted"></span></h2>
+    <div class="summary" id="summary-cards"></div>
+
+    <div class="actions">
+      <button id="btn-recalc" class="btn secondary">↻ 重新计算</button>
+      <button id="btn-export" class="btn secondary">⬇ 导出 JSON</button>
+    </div>
+
+    <h3>例外包（已人工确认豁免）</h3>
+    <div id="exceptions-list" class="exceptions muted">暂无例外包</div>
+
+    <h3>依赖明细</h3>
+    <div class="table-wrap">
+      <table id="findings-table">
+        <thead>
+          <tr>
+            <th>状态</th><th>包</th><th>许可证</th><th>触发规则</th><th>最短依赖路径</th><th>操作</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>历史审查</h2>
+    <ul id="history-list" class="history muted"><li>暂无记录</li></ul>
+  </section>
+</main>
+
+<footer>FastAPI + SQLite · 数据保存在本地 data/review.db</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

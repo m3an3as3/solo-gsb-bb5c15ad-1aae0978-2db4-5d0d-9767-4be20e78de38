@@ -1,0 +1,13 @@
+services:
+  license-review:
+    build: .
+    container_name: license-review
+    ports:
+      - "8000:8000"
+    environment:
+      # SQLite 数据库文件位置（容器内路径，已挂载到 ./data）
+      DB_PATH: /app/data/review.db
+      SAMPLE_PATH: /app/sample_manifest.json
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

@@ -1,0 +1,33 @@
+{
+  "project": {
+    "name": "shop-api",
+    "version": "1.4.2",
+    "license": "Proprietary"
+  },
+  "packages": [
+    { "name": "fastapi",            "version": "0.115.6", "license": "MIT" },
+    { "name": "sqlalchemy",         "version": "2.0.36",  "license": "MIT" },
+    { "name": "pymysql",            "version": "1.1.1",   "license": "MIT" },
+    { "name": "mysql-connector-gpl","version": "8.0.33",  "license": "GPL-2.0" },
+    { "name": "celery",             "version": "5.4.0",   "license": "BSD-3-Clause" },
+    { "name": "kombu",              "version": "5.4.2",   "license": "BSD-3-Clause" },
+    { "name": "report-toolkit",     "version": "3.2.1",   "license": "LGPL-3.0" },
+    { "name": "chart-render",       "version": "1.9.0",   "license": "AGPL-3.0" },
+    { "name": "legacy-utils",       "version": "0.9.7",   "license": "Unknown" },
+    { "name": "cryptolib",          "version": "2.2.0",   "license": "Proprietary" },
+    { "name": "requests",           "version": "2.32.3",  "license": "Apache-2.0" }
+  ],
+  "dependencies": [
+    { "from": "shop-api",       "to": "fastapi" },
+    { "from": "shop-api",       "to": "sqlalchemy" },
+    { "from": "shop-api",       "to": "celery" },
+    { "from": "shop-api",       "to": "report-toolkit" },
+    { "from": "sqlalchemy",     "to": "pymysql" },
+    { "from": "pymysql",        "to": "mysql-connector-gpl" },
+    { "from": "celery",         "to": "kombu" },
+    { "from": "report-toolkit", "to": "chart-render" },
+    { "from": "report-toolkit", "to": "legacy-utils" },
+    { "from": "fastapi",        "to": "requests" },
+    { "from": "legacy-utils",   "to": "cryptolib" }
+  ]
+}
